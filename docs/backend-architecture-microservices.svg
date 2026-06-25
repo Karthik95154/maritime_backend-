@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100">
+  <defs>
+    <style>
+      .title { font: 700 34px Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 16px Arial, sans-serif; fill: #475569; }
+      .lane { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 2; rx: 24; }
+      .card { fill: #ffffff; stroke: #94a3b8; stroke-width: 2; rx: 18; }
+      .cardBlue { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; rx: 18; }
+      .cardGreen { fill: #f0fdf4; stroke: #16a34a; stroke-width: 2; rx: 18; }
+      .cardAmber { fill: #fffbeb; stroke: #f59e0b; stroke-width: 2; rx: 18; }
+      .cardPurple { fill: #faf5ff; stroke: #7c3aed; stroke-width: 2; rx: 18; }
+      .cardRose { fill: #fff1f2; stroke: #e11d48; stroke-width: 2; rx: 18; }
+      .header { font: 700 18px Arial, sans-serif; fill: #0f172a; }
+      .body { font: 400 14px Arial, sans-serif; fill: #334155; }
+      .small { font: 400 12px Arial, sans-serif; fill: #475569; }
+      .section { font: 700 16px Arial, sans-serif; fill: #1e293b; letter-spacing: 0.5px; }
+      .arrow { stroke: #2563eb; stroke-width: 4; fill: none; marker-end: url(#arrowHead); }
+      .arrowDashed { stroke: #f59e0b; stroke-width: 3; fill: none; stroke-dasharray: 10 8; marker-end: url(#arrowHeadAmber); }
+      .label { font: 700 13px Arial, sans-serif; fill: #0f172a; }
+      .pill { fill: #e2e8f0; rx: 12; }
+    </style>
+    <marker id="arrowHead" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowHeadAmber" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1800" height="1100" fill="#ffffff"/>
+
+  <text x="900" y="54" text-anchor="middle" class="title">Maritime AI Backend Architecture</text>
+  <text x="900" y="82" text-anchor="middle" class="subtitle">Microservice-based AI pipeline with human review, explainability, and analytics</text>
+
+  <rect x="40" y="120" width="1720" height="130" class="lane"/>
+  <text x="70" y="154" class="section">ENTRY LAYER</text>
+  <rect x="70" y="172" width="220" height="56" class="cardBlue"/>
+  <text x="180" y="195" text-anchor="middle" class="header">Frontend UI</text>
+  <text x="180" y="214" text-anchor="middle" class="body">Ship repair engineer / inspector</text>
+  <rect x="330" y="172" width="240" height="56" class="cardBlue"/>
+  <text x="450" y="195" text-anchor="middle" class="header">API Gateway</text>
+  <text x="450" y="214" text-anchor="middle" class="body">Auth, routing, limits, tracing</text>
+  <rect x="620" y="172" width="280" height="56" class="cardPurple"/>
+  <text x="760" y="195" text-anchor="middle" class="header">Workflow Orchestrator</text>
+  <text x="760" y="214" text-anchor="middle" class="body">State machine, retries, checkpoints</text>
+  <rect x="950" y="172" width="240" height="56" class="cardAmber"/>
+  <text x="1070" y="195" text-anchor="middle" class="header">Event Bus</text>
+  <text x="1070" y="214" text-anchor="middle" class="body">RabbitMQ / Redis Streams / Kafka</text>
+  <rect x="1230" y="172" width="250" height="56" class="cardGreen"/>
+  <text x="1355" y="195" text-anchor="middle" class="header">Workflow Status API</text>
+  <text x="1355" y="214" text-anchor="middle" class="body">Live progress, review state</text>
+  <rect x="1530" y="172" width="180" height="56" class="card"/>
+  <text x="1620" y="195" text-anchor="middle" class="header">Observability</text>
+  <text x="1620" y="214" text-anchor="middle" class="body">Logs, metrics, traces</text>
+
+  <path d="M290 200 L330 200" class="arrow"/>
+  <path d="M570 200 L620 200" class="arrow"/>
+  <path d="M900 200 L950 200" class="arrow"/>
+  <path d="M1190 200 L1230 200" class="arrow"/>
+  <path d="M1480 200 L1530 200" class="arrow"/>
+
+  <rect x="40" y="280" width="1720" height="380" class="lane"/>
+  <text x="70" y="314" class="section">AI PIPELINE LAYER</text>
+
+  <rect x="70" y="340" width="240" height="250" class="cardBlue"/>
+  <text x="190" y="372" text-anchor="middle" class="header">Frame Extraction Service</text>
+  <text x="190" y="404" text-anchor="middle" class="body">Video upload</text>
+  <text x="190" y="426" text-anchor="middle" class="body">Frame sampling and dedupe</text>
+  <text x="190" y="448" text-anchor="middle" class="body">Frame batches to queue</text>
+  <rect x="98" y="476" width="184" height="88" class="pill"/>
+  <text x="190" y="506" text-anchor="middle" class="label">Outputs</text>
+  <text x="190" y="528" text-anchor="middle" class="small">frames.json</text>
+  <text x="190" y="546" text-anchor="middle" class="small">thumbnails</text>
+
+  <rect x="350" y="340" width="240" height="250" class="cardBlue"/>
+  <text x="470" y="372" text-anchor="middle" class="header">AI Classification Service</text>
+  <text x="470" y="404" text-anchor="middle" class="body">Ship area classification</text>
+  <text x="470" y="426" text-anchor="middle" class="body">Deck / hull / part labels</text>
+  <text x="470" y="448" text-anchor="middle" class="body">Confidence scoring</text>
+  <rect x="378" y="476" width="184" height="88" class="pill"/>
+  <text x="470" y="506" text-anchor="middle" class="label">Outputs</text>
+  <text x="470" y="528" text-anchor="middle" class="small">classification results</text>
+  <text x="470" y="546" text-anchor="middle" class="small">per-frame metadata</text>
+
+  <rect x="630" y="340" width="240" height="250" class="cardRose"/>
+  <text x="750" y="372" text-anchor="middle" class="header">AI Defect Detection Service</text>
+  <text x="750" y="404" text-anchor="middle" class="body">Segmentation and detection</text>
+  <text x="750" y="426" text-anchor="middle" class="body">Corrosion, crack, hole, paint failure</text>
+  <text x="750" y="448" text-anchor="middle" class="body">Evidence frames + masks</text>
+  <rect x="658" y="476" width="184" height="88" class="pill"/>
+  <text x="750" y="506" text-anchor="middle" class="label">Outputs</text>
+  <text x="750" y="528" text-anchor="middle" class="small">detections</text>
+  <text x="750" y="546" text-anchor="middle" class="small">mask overlays</text>
+
+  <rect x="910" y="340" width="240" height="250" class="cardPurple"/>
+  <text x="1030" y="372" text-anchor="middle" class="header">Temporal Consistency Service</text>
+  <text x="1030" y="404" text-anchor="middle" class="body">Track defects across frames</text>
+  <text x="1030" y="426" text-anchor="middle" class="body">Remove duplicates and drift</text>
+  <text x="1030" y="448" text-anchor="middle" class="body">Stable defect IDs</text>
+  <rect x="938" y="476" width="184" height="88" class="pill"/>
+  <text x="1030" y="506" text-anchor="middle" class="label">Outputs</text>
+  <text x="1030" y="528" text-anchor="middle" class="small">unique defects</text>
+  <text x="1030" y="546" text-anchor="middle" class="small">history timeline</text>
+
+  <rect x="1190" y="340" width="240" height="250" class="cardAmber"/>
+  <text x="1310" y="372" text-anchor="middle" class="header">Quantification + Cost</text>
+  <text x="1310" y="404" text-anchor="middle" class="body">Area, severity, confidence</text>
+  <text x="1310" y="426" text-anchor="middle" class="body">Repair material and labor cost</text>
+  <text x="1310" y="448" text-anchor="middle" class="body">Rule + model blending</text>
+  <rect x="1218" y="476" width="184" height="88" class="pill"/>
+  <text x="1310" y="506" text-anchor="middle" class="label">Outputs</text>
+  <text x="1310" y="528" text-anchor="middle" class="small">quantified defects</text>
+  <text x="1310" y="546" text-anchor="middle" class="small">cost estimate</text>
+
+  <rect x="1470" y="340" width="240" height="250" class="cardGreen"/>
+  <text x="1590" y="372" text-anchor="middle" class="header">Human Review Service</text>
+  <text x="1590" y="404" text-anchor="middle" class="body">Low confidence routing</text>
+  <text x="1590" y="426" text-anchor="middle" class="body">Approve / correct / reject</text>
+  <text x="1590" y="448" text-anchor="middle" class="body">Feedback loop to models</text>
+  <rect x="1498" y="476" width="184" height="88" class="pill"/>
+  <text x="1590" y="506" text-anchor="middle" class="label">Outputs</text>
+  <text x="1590" y="528" text-anchor="middle" class="small">review decision</text>
+  <text x="1590" y="546" text-anchor="middle" class="small">audit trail</text>
+
+  <path d="M310 465 L350 465" class="arrow"/>
+  <path d="M590 465 L630 465" class="arrow"/>
+  <path d="M870 465 L910 465" class="arrow"/>
+  <path d="M1150 465 L1190 465" class="arrow"/>
+  <path d="M1430 465 L1470 465" class="arrow"/>
+
+  <path d="M470 590 C470 680, 1310 680, 1590 590" class="arrowDashed"/>
+  <text x="1030" y="704" text-anchor="middle" class="small">Human feedback returns to training data and workflow improvements</text>
+
+  <rect x="40" y="690" width="1720" height="320" class="lane"/>
+  <text x="70" y="724" class="section">SUPPORTING PLATFORMS</text>
+
+  <rect x="70" y="760" width="350" height="160" class="cardBlue"/>
+  <text x="245" y="792" text-anchor="middle" class="header">Object Storage</text>
+  <text x="245" y="822" text-anchor="middle" class="body">MinIO / S3</text>
+  <text x="245" y="846" text-anchor="middle" class="body">Video uploads, frames, reports, evidence</text>
+  <text x="245" y="870" text-anchor="middle" class="body">Immutable artifacts and downloads</text>
+
+  <rect x="460" y="760" width="350" height="160" class="cardPurple"/>
+  <text x="635" y="792" text-anchor="middle" class="header">MongoDB</text>
+  <text x="635" y="822" text-anchor="middle" class="body">Inspections, defects, workflow events</text>
+  <text x="635" y="846" text-anchor="middle" class="body">Approvals, reports, analytics records</text>
+  <text x="635" y="870" text-anchor="middle" class="body">Durable workflow checkpoints</text>
+
+  <rect x="850" y="760" width="350" height="160" class="cardAmber"/>
+  <text x="1025" y="792" text-anchor="middle" class="header">Redis</text>
+  <text x="1025" y="822" text-anchor="middle" class="body">Cache, locks, progress state, sessions</text>
+  <text x="1025" y="846" text-anchor="middle" class="body">Rate limiting and websocket presence</text>
+  <text x="1025" y="870" text-anchor="middle" class="body">Fast low-latency coordination</text>
+
+  <rect x="1240" y="760" width="430" height="160" class="cardGreen"/>
+  <text x="1455" y="792" text-anchor="middle" class="header">Analytics + Observability</text>
+  <text x="1455" y="822" text-anchor="middle" class="body">Dashboards, metrics, logs, traces, alerts</text>
+  <text x="1455" y="846" text-anchor="middle" class="body">Fleet trends, defect distribution, KPI tracking</text>
+  <text x="1455" y="870" text-anchor="middle" class="body">Support for SRE and product teams</text>
+
+  <path d="M190 760 C190 720, 190 705, 190 660" class="arrow"/>
+  <path d="M470 760 C470 720, 470 705, 470 660" class="arrow"/>
+  <path d="M750 760 C750 720, 750 705, 750 660" class="arrow"/>
+  <path d="M1030 760 C1030 720, 1030 705, 1030 660" class="arrow"/>
+  <path d="M1310 760 C1310 720, 1310 705, 1310 660" class="arrow"/>
+  <path d="M1590 760 C1590 720, 1590 705, 1590 660" class="arrow"/>
+
+  <text x="900" y="1060" text-anchor="middle" class="subtitle">Asynchronous pipeline • Human-in-the-loop review • Traceable outputs • Service isolation</text>
+</svg>

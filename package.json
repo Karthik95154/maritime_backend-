@@ -1,0 +1,13 @@
+{
+  "name": "maritimeinspect-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "powershell -ExecutionPolicy Bypass -Command \"Set-Location 'D:\\maritime_web_codex\\backend'; python -m uvicorn main:app --host 127.0.0.1 --port 8000 --reload\"",
+    "dev:full": "powershell -ExecutionPolicy Bypass -File ./start-maritimeinspect.ps1",
+    "build": "npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview"
+  }
+}

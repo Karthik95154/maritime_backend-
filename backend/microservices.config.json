@@ -1,0 +1,65 @@
+[
+  {
+    "key": "frame_extraction",
+    "title": "Frame Extraction Service",
+    "entrypoint": "microservices.frame_extraction_service:app",
+    "url": "http://10.0.0.21:8101",
+    "stage_name": "Frame Extraction"
+  },
+  {
+    "key": "classification",
+    "title": "AI Classification Service",
+    "entrypoint": "microservices.classification_service:app",
+    "url": "http://10.0.0.22:8102",
+    "stage_name": "AI Classification"
+  },
+  {
+    "key": "defect_detection",
+    "title": "AI Defect Detection Service",
+    "entrypoint": "microservices.defect_detection_service:app",
+    "url": "http://10.0.0.23:8103",
+    "stage_name": "Defect Detection"
+  },
+  {
+    "key": "temporal_consistency",
+    "title": "Temporal Consistency Service",
+    "entrypoint": "microservices.temporal_consistency_service:app",
+    "url": "http://10.0.0.24:8104",
+    "stage_name": "Temporal Consistency"
+  },
+  {
+    "key": "unique_defects",
+    "title": "Unique Defect Service",
+    "entrypoint": "microservices.unique_defect_service:app",
+    "url": "http://10.0.0.25:8105",
+    "stage_name": "Unique Defect Extraction"
+  },
+  {
+    "key": "cost_estimation",
+    "title": "Cost Estimation Service",
+    "entrypoint": "microservices.cost_estimation_service:app",
+    "url": "http://10.0.0.26:8106",
+    "stage_name": "Cost Estimation"
+  },
+  {
+    "key": "explainability",
+    "title": "Explainability Service",
+    "entrypoint": "microservices.explainability_service:app",
+    "url": "http://10.0.0.27:8107",
+    "stage_name": "Explainability"
+  },
+  {
+    "key": "report_generation",
+    "title": "Report Generation Service",
+    "entrypoint": "microservices.report_generation_service:app",
+    "url": "http://10.0.0.28:8108",
+    "stage_name": "Document Generation"
+  },
+  {
+    "key": "analytics",
+    "title": "Analytics Service",
+    "entrypoint": "microservices.analytics_service:app",
+    "url": "http://10.0.0.29:8109",
+    "stage_name": "Analytics"
+  }
+]
