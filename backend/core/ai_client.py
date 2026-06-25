@@ -2,7 +2,6 @@ import httpx
 import logging
 import os
 from database import db_instance
-from services.local_worker_service import local_worker
 
 logger = logging.getLogger(__name__)
 
@@ -13,12 +12,16 @@ async def trigger_generic_worker(stage_config: dict, inspection_id: str, vessel_
     is_local = stage_config.get("is_local", False)
     
     if is_local:
+        logger.info(f"[{inspection_id}] Executing LOCAL stage: {stage_config['name']}")
+        from services.local_worker_service import local_worker
         return await local_worker.execute_local_stage(
             stage_config["name"], 
             inspection_id, 
             vessel_id, 
             visit_id
         )
+
+    logger.info(f"[{inspection_id}] Executing REMOTE stage: {stage_config['name']}")
 
     # Determine URL for remote execution
     env_key = stage_config.get("endpoint_env")
