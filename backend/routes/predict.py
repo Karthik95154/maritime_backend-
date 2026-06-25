@@ -207,9 +207,8 @@ async def predict_videos(
             await db_instance.analysis_sessions.insert_one(analysis.model_dump())
 
         # Trigger Orchestration
-        from services.orchestration_service import start_pipeline
-        import asyncio
-        asyncio.create_task(start_pipeline(inspection_id))
+        from services.orchestration_service import orchestration_service
+        orchestration_service.start_job(inspection_id)
         
         log_pipeline_event(
             inspection_id,

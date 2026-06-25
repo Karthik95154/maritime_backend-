@@ -211,12 +211,19 @@ async def resume_pipeline(inspection_id: str):
     await _run_pipeline_loop(inspection_id, start_index=start_index)
 
 class OrchestrationService:
+    def __init__(self):
+        self.background_tasks = set()
+
     def start_job(self, inspection_id: str):
         import asyncio
-        asyncio.create_task(start_pipeline(inspection_id))
+        task = asyncio.create_task(start_pipeline(inspection_id))
+        self.background_tasks.add(task)
+        task.add_done_callback(self.background_tasks.discard)
         
     def resume_job(self, inspection_id: str):
         import asyncio
-        asyncio.create_task(resume_pipeline(inspection_id))
+        task = asyncio.create_task(resume_pipeline(inspection_id))
+        self.background_tasks.add(task)
+        task.add_done_callback(self.background_tasks.discard)
 
 orchestration_service = OrchestrationService()
