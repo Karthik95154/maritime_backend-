@@ -50,25 +50,41 @@ async def upload_frame(
     if not inspection_id or not frame_id:
         raise HTTPException(status_code=400, detail="inspection_id and frame_id are required")
         
-    frames_dir = _get_inspection_dir(inspection_id, "frames")
     filename = f"frame_{str(frame_id).zfill(6)}.jpg"
+    logger.info(f"\nFRAME UPLOAD STARTED\nInspection: {inspection_id}\nFilename: {filename}")
+    
+    frames_dir = os.path.join("storage", "frames", inspection_id)
+    os.makedirs(frames_dir, exist_ok=True)
     file_path = os.path.join(frames_dir, filename)
     
     await _save_upload_file(file, file_path)
-    logger.info(f"[{inspection_id}] Saved frame to {file_path}")
     
-    # Use forward slashes for cross-platform consistency in DB
-    normalized_path = file_path.replace("\\", "/")
+    if not os.path.exists(file_path):
+        raise HTTPException(status_code=500, detail="File save failed")
+        
+    abs_path = os.path.abspath(file_path)
+    logger.info(f"\nFrame Saved:\nAbsolute Path: {abs_path}")
     
+    backend_url_path = f"/api/v1/storage/frame/{inspection_id}/{filename}"
+    
+    from datetime import datetime
     await db_instance.db["inspection_artifacts"].update_one(
         {"inspection_id": inspection_id},
-        {"$push": {"frames": normalized_path}},
+        {"$push": {"frames": {
+            "frame_name": filename,
+            "frame_path": backend_url_path,
+            "created_at": datetime.utcnow().isoformat()
+        }}},
         upsert=True
     )
     
-    logger.info("\nFRAME UPLOADED\nMongo Updated")
+    logger.info("\nMongo Updated\n\nReturning Success")
     
-    return {"success": True, "frame_path": normalized_path}
+    return {
+        "success": True,
+        "frame_name": filename,
+        "frame_path": backend_url_path
+    }
 
 
 @router.post("/defect")
@@ -213,7 +229,19 @@ def _get_file_response(inspection_id: str, subfolder: str, filename: str):
 
 @router.get("/frame/{inspection_id}/{filename}")
 async def download_frame(inspection_id: str, filename: str):
-    return _get_file_response(inspection_id, "frames", filename)
+    logger.info(f"\nFRAME DOWNLOAD REQUEST\n\nInspection: {inspection_id}\nFilename: {filename}")
+    
+    file_path = os.path.join("storage", "frames", inspection_id, filename)
+    resolved_path = os.path.abspath(file_path)
+    file_exists = os.path.exists(file_path)
+    
+    logger.info(f"\nResolved Path: {resolved_path}\n\nFile Exists: {file_exists}")
+    
+    if not file_exists:
+        logger.warning(f"\nFrame not found\nInspection: {inspection_id}\nFilename: {filename}\nExpected Path: {resolved_path}")
+        raise HTTPException(status_code=404, detail="File not found")
+        
+    return FileResponse(file_path)
 
 @router.get("/defect/{inspection_id}/{filename}")
 async def download_defect(inspection_id: str, filename: str):
